@@ -169,6 +169,9 @@ class GarminConnectSensor(CoordinatorEntity, SensorEntity):
         if self._type == "lastActivities":
             return len(self.coordinator.data[self._type])
 
+        if self._type == "hrvStatus":
+            return self.coordinator.data[self._type]["status"]
+
         if not self.coordinator.data or not self.coordinator.data[self._type]:
             return None
 
@@ -216,6 +219,10 @@ class GarminConnectSensor(CoordinatorEntity, SensorEntity):
             attributes["next_alarms"] = calculate_next_active_alarms(
                 self.coordinator.data[self._type]
             )
+
+        if self._type == "hrvStatus":
+            attributes = {**attributes, **self.coordinator.data[self._type]}
+            del attributes["status"]
 
         return attributes
 
