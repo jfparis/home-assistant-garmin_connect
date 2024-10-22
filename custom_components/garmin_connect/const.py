@@ -415,7 +415,7 @@ GARMIN_ENTITY_LIST = {
         None,
         None,
         True,
-    ]
+    ],
 }
 
 GEAR_ICONS = {
